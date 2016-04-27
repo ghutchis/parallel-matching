@@ -7,6 +7,15 @@ using namespace std;
 bool sortAtomZ(const pair<Atom*,double> &a, const pair<Atom*,double> &b)
 {   return (a.second < b.second); }
 
+void Molecule::addBond(Atom *a, Atom *b, unsigned short type) {
+  Bond *bond = new Bond(a, b);
+  bond->setType(type);
+  _bonds.push_back(bond);
+
+  a->addBond(bond);
+  b->addBond(bond);
+}
+
 void Molecule::perceiveBonds() {
   // find the initial bonded atoms
   unsigned int max;
